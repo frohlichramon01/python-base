@@ -2,18 +2,28 @@
 # tell what to use to run this script
 
 import os
+import sys
 
-current_language = os.getenv("LANG")[:5]
+arguments = {"lang": None,
+             "count": 1,
+             }
 
-msg = "Hello World!"
+for arg in sys.argv[1:]:
+    key, value = arg.split("=")
+    key = key.lstrip("-")
+    value = value.strip()
+    if key not in arguments:
+        print(f"Invalid argument '{key}'")
+    arguments[key] = value
 
-if current_language == "pt_BR":
-    msg = "Olá mundo!"
-elif current_language == "it_IT":
-    msg = "Ciao mondo!"
-elif current_language == "es_SP":
-    msg = "Hola mundo!"
-elif current_language == "fr_FR":
-    msg = "Bonjour monde!"
+current_language = arguments["lang"]
+if current_language is None:
+    current_language = os.getenv("LANG", "en_US")[:5]
 
-print(msg)
+msg = {"en_US": "Hello World!",
+       "pt_BR": "Olá mundo!",
+       "it_IT": "Ciao mondo!",
+       "es_SP": "Hola mundo!",
+       "fr_FR": "Bonjour monde!"}
+
+print(msg[current_language] * int(arguments["count"]))
