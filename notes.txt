@@ -1,0 +1,4 @@
+minha primeira nota	1	1
+minha segunda nota	2	2
+minha terceira  nota	3	3
+minha segunda segunda nota	2	2minha 1  nota	1	1
