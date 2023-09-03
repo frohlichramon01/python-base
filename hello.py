@@ -9,7 +9,12 @@ arguments = {"lang": None,
              }
 
 for arg in sys.argv[1:]:
-    key, value = arg.split("=")
+    try:
+        key, value = arg.split("=")
+    except ValueError:
+        print("You should check the argument. Use '='.")
+        sys.exit(1)
+
     key = key.lstrip("-")
     value = value.strip()
     if key not in arguments:
